@@ -1,0 +1,24 @@
+'Documents': ['.doc', '.docx', '.odt', '.pdf', '.rtf', '.tex', '.txt',
+'.wks', '.wps', '.wpd', '.ods', '.xlr', '.xls', '.xlsx', '.key', '.odp',
+'.pps', '.ppt', '.pptx', '.csv', '.dat', '.db', '.dbf', '.log', '.mdb',
+'.sav', '.sql', '.tar', '.xml', '.html'],
+
+
+'Music': ['.aif', '.cda', '.mid', '.midi', '.mp3', '.mpa', '.ogg',
+'.wav', '.mwa', '.wpl'],
+
+
+
+'Pictures': ['.ai', '.bmp', '.gif', '.ico', '.jpeg', '.jpg', '.png',
+'.ps', '.psd', '.svg', '.tif', '.tiff'],
+
+
+'Videos': ['.3g2', '.3gp', '.avi', '.flv', '.h264', '.m4v', '.mkv',
+'.mov', '.mp4', '.mpg', '.mpeg', '.rm', '.swf', '.vob', '.wmv'],
+
+
+'programs': ['.apk', '.bat', '.bin', '.cgi', '.pl', '.com', '.exe',
+'.gadget', '.jar', '.py', '.wsf', '.iso']
+
+
+

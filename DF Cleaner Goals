@@ -1,0 +1,19 @@
+
+GOALS
+
+create a directory in path 
+
+read files by extention 
+
+move files in to specic directory (created) based on ext 
+
+    *note
+        ignore exsisting folders place in sperate folder
+
+        ignore created directories  
+
+PREP
+
+list of file ext sorted by file type 
+
+

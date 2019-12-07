@@ -1,12 +1,7 @@
 #directory organizer
 import os
 import parser
-
-class n_tree:
-    def add_node(self, data, parrent):
-        pass
-    def add_data(self, node_name, parrent):
-        pass
+import n_tree
 
 def check_string(string):
     try:
@@ -15,11 +10,7 @@ def check_string(string):
     except ValueError:
         return(False)
 
-class n_tree:
-    def __init__(self):
-        self.tree = None
-
-class sha_hashmap:
+class sorting_hat:
     def __init__(self):
         self.cache_file_name = '.cache.dat'
         self.file_map = dict()
@@ -36,7 +27,7 @@ class sha_hashmap:
         cur_dir = '' 
         while True:
             cur_dir = input('Enter directory to start scan')
-            if check_string(cur_dir) and os.path.isdir(cur_dfir):
+            if check_string(cur_dir) and os.path.isdir(cur_dir):
                 break
             else:
                 print('Invalid!\n')
@@ -64,8 +55,3 @@ class sha_hashmap:
             else:
                 # exit tree building when list is empty, representing no more subdirectories to scan
                 break
-            
-
-    def hash_file(self, file):
-        pass
-

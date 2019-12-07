@@ -2,6 +2,12 @@
 import os
 import parser
 
+class n_tree:
+    def add_node(self, data, parrent):
+        pass
+    def add_data(self, node_name, parrent):
+        pass
+
 def check_string(string):
     try:
         str(string)
@@ -30,15 +36,35 @@ class sha_hashmap:
         cur_dir = '' 
         while True:
             cur_dir = input('Enter directory to start scan')
-            if check_string(cur_dir) and os.path.isdir(cur_dir):
+            if check_string(cur_dir) and os.path.isdir(cur_dfir):
                 break
             else:
                 print('Invalid!\n')
                 continue
         os.chdir(cur_dir)
+        root = cur_dir
+        data_tree = n_tree()
 
-        #begin building directory hash
-
+        #begin building directory tree
+        while True:
+            #list sub-directorys and files at current location
+            temp_list = os.listdir(cur_dir)
+            for item in temp_list:
+                #somefunction that tells me waht the damn filetype is
+                if os.path.isdir(cur_dir + item) is not True:
+                    #add data to current node
+                    data_tree.add_data(item, cur_dir)
+                else:
+                    #add subdirectory to current node
+                    data_tree.add_node(item, cur_dir)
+                    temp_list.append(cur_dir + item)
+            if len(temp_list) > 0:
+                # update current dirrectory with subdirectory of current location
+                cur_dir = temp_list.pop()
+            else:
+                # exit tree building when list is empty, representing no more subdirectories to scan
+                break
+            
 
     def hash_file(self, file):
         pass

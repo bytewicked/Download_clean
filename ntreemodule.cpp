@@ -38,7 +38,7 @@ public:
 
 n_tree::n_tree()
 {
-    this.root = new node;
+    this.root = new node();
 }
 
 node* n_tree::find_node(std::string search_name)
@@ -111,30 +111,35 @@ n_tree::~n_tree()
     auto cur_node = this.root;
     node* temp = nullptr;
     while(true)
+    {
+        //start deletion at root node level
+        for (size_t i = 0; i < cur_node->child_links.size(); i++)
+        {
+            temp = cur_node->child_links.at(i);
+            if(temp->child_links.size() > 0)
             {
-                //start deletion at root node level
-                for (size_t i = 0; i < cur_node->child_links.size(); i++)
-                {
-                    temp = cur_node->child_links.at(i);
-                    if(temp->child_links.size() > 0)
-                    {
-                        transverse_list.push_back(temp);
-                    }
-                    else
-                    {
-                        delete(temp);
-                    }
-                      
-                }
-                if(traverse_list.size() > 0)
-                {
-                    cur_node = traverse_list.pop_back();
-                }
-                else
-                {// at root
-                    delete(this->root);
-                    return();
-                }
+                transverse_list.push_back(temp);
+            }
+            else
+            {
+                delete(temp);
+            }
                 
-            } 
+        }
+        if(traverse_list.size() > 0)
+        {
+            cur_node = traverse_list.pop_back();
+        }
+        else
+        {// at root
+            delete(this->root);
+            return();
+        }
+        
+    } 
 }
+
+#include <boost/python/module.hpp>
+#include <boost/python/def.hpp>
+// https://en.wikibooks.org/wiki/Python_Programming/Extending_with_C%2B%2B
+

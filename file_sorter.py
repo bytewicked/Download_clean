@@ -9,6 +9,10 @@ def check_string(string):
     except ValueError:
         return(False)
 
+class n_tree:
+    def __init__(self):
+        self.tree = None
+
 class sha_hashmap:
     def __init__(self):
         self.cache_file_name = '.cache.dat'
@@ -32,6 +36,9 @@ class sha_hashmap:
                 print('Invalid!\n')
                 continue
         os.chdir(cur_dir)
+
+        #begin building directory hash
+
 
     def hash_file(self, file):
         pass

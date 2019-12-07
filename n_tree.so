@@ -1,0 +1,42 @@
+// n_tree object
+#include <string>
+
+extern struct node
+{
+    std::string node_name = "";
+    std::string* data = nullptr;    // string array of data
+    node* parrent = nullptr;        // pointer to parrent node
+    node* child_links = nullptr;    // array of node pointers
+    int num_children = 0;
+};
+
+extern class n_tree
+{
+private:
+    node* root = nullptr;
+public:
+    n_tree(/* args */);
+    ~n_tree();
+
+    void add_node(std::string* data, std::string parrent_name);
+};
+
+n_tree::n_tree(/* args */)
+{
+    this.root = new node;
+}
+
+void n_tree::add_node(std::string* data, std::string parrent_name)
+{
+    auto temp = this.root;
+    for (size_t i = 0; i < count; i++)
+    {
+        //stuff
+    }
+    
+    //stuff
+}
+
+n_tree::~n_tree()
+{
+}

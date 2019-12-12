@@ -1,7 +1,6 @@
 // n_tree object
-#include <boost/python.hpp>
-#include <boost/python/module.hpp>
-#include <boost/python/def.hpp>
+
+#include <python3.7m/Python.h>
 
 // https://en.wikibooks.org/wiki/Python_Programming/Extending_with_C%2B%2B
 // https://www.boost.org/doc/libs/1_61_0/libs/python/doc/html/tutorial/tutorial/exposing.html
@@ -126,6 +125,7 @@ void n_tree::add_data(std::string data, std::string parent_name)
 
 n_tree::~n_tree()
 {
+    printf("deleting object\n");
     std::vector<node*> t_list = std::vector<node*>();
     auto cur_node = this->root;
     node* temp = nullptr;
@@ -159,11 +159,78 @@ n_tree::~n_tree()
     } 
 }
 
-using namespace boost::python;
-BOOST_PYTHON_MODULE(n_tree)
+// static PyMethodDef n_tree_funcs[] = {
+//     {"find_name", n_tree::find_name, METH_VARARGS, NULL},
+//     {"add_node", n_tree::add_node, METH_VARARGS, NULL},
+//     {"add_data", n_tree::add_data, METH_VARARGS, NULL},
+//     {NULL, NULL, 0, NULL}
+// };
+
+namespace python_function
 {
-    class_<n_tree>("n_tree")
-    .def("add_node", &n_tree::add_node)
-    .def("add_data", &n_tree::add_data)
-    .def("find_name", &n_tree::find_name);
-}
+    n_tree* evil_pointer = nullptr;
+
+    static PyObject* init_ntree(PyObject *self, PyObject *args)
+    {
+        evil_pointer = new n_tree();
+        printf("instantized new object!\n");
+        Py_XINCREF(NULL);
+        return Py_None;
+    }
+    static PyObject* del_ntree(PyObject *self, PyObject *args)
+    {
+        delete evil_pointer;
+        printf("deleted new object!\n");
+        Py_XINCREF(NULL);
+        return Py_None;
+    }
+    static PyObject* ntree_find_name(PyObject *self, PyObject *args)
+    {
+        printf("find name called");
+        auto search_result = evil_pointer->find_name("test");
+        if(search_result.compare("") == 0)
+        {
+            // return search_result.c_str();
+            return Py_None;
+        }
+        Py_XINCREF(NULL);
+        return Py_None;
+    }
+    static PyObject* ntree_add_node(PyObject *self, PyObject *args)
+    {
+        printf("add node called\n");
+        Py_XINCREF(NULL);
+        return Py_None;
+    }
+
+    static PyObject* ntree_add_data(PyObject *self, PyObject *args)
+    {
+        printf("add data called\n");
+        Py_XINCREF(NULL);
+        return Py_None;
+    }
+    // setup methods for passing
+    static PyMethodDef ntreemethods[] =
+    {
+        {"__init__",    init_ntree, METH_VARARGS,       "initializer for ntree object"},
+        {"__del__",     del_ntree, METH_VARARGS,        "destructor for ntree object"},
+        {"add_node",    ntree_add_node, METH_VARARGS,   "add node to ntree"},
+        {"add_data",    ntree_add_data, METH_VARARGS,   "add data to node in ntree"},
+        {NULL, NULL, 0, NULL}        /* Sentinel */
+    };
+
+    static struct PyModuleDef ntreemodule = {
+        /* name of module */
+        /* module documentation, may be NULL */
+        /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
+        PyModuleDef_HEAD_INIT,
+        "ntree", NULL, -1, ntreemethods
+    };
+
+    PyMODINIT_FUNC PyInit_ntree(void)
+    {
+        return PyModule_Create(&ntreemodule);
+    }
+} // namespace python_function
+
+
